@@ -8,7 +8,6 @@ public class Pedido {
     private LocalDate data;
     private Cliente cliente;
     private List<Item> itens;
-
     private Estado estado;
 
     public Pedido(Cliente cliente) {
