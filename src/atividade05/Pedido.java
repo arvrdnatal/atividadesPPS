@@ -2,6 +2,7 @@ package atividade05;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Pedido {
     protected List<ItemDoPedido> itensPedido;
@@ -12,8 +13,7 @@ public class Pedido {
     }
 
     protected Pedido(PedidoBuilder builder) {
-        if(builder.observacoes == null) observacoes = "-";
-        else observacoes = builder.observacoes;
+        observacoes = Objects.requireNonNullElse(builder.observacoes, "vazio");
         itensPedido = builder.itensPedido;
     }
 
@@ -22,8 +22,7 @@ public class Pedido {
         StringBuilder pedido = new StringBuilder("Pedido\n\n");
         String frase;
         for(ItemDoPedido item : itensPedido) {
-            frase =
-                    item.getProduto().nome() + " (" + item.getProduto().preco() + ") - QTD: " + item.getQuantidade() + " - Subtotal: " + (item.getProduto().preco() * item.getQuantidade()) + " - Obs: " + item.getProduto().obs() + "\n";
+            frase = item.getProduto().nome() + " (" + item.getProduto().preco() + ") - QTD: " + item.getQuantidade() + " - Subtotal: " + (item.getProduto().preco() * item.getQuantidade()) + " - Obs: " + item.getProduto().obs() + "\n";
             pedido.append(frase);
         }
         frase = "\nObservações: " + observacoes;
